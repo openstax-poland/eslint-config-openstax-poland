@@ -26,6 +26,10 @@ ESlint configurations used by OpenStax Poland.
 - `openstax-poland/base`: Extends `eslint:recommended` with additional best
   practices. Designed to contain as few stylistic rules as possible.
 
+- `openstax-poland/react/base`: Extends `openstax-poland/base` with additional
+  rules from `eslint-plugin-react`. To use this config you must also add
+  `eslint-plugin-react` to your `devDependencies`.
+
 ## Adding a new config
 
 1.  Choose a name for you config. We'll use `my-config` as an example.
