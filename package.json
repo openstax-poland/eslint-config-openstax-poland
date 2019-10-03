@@ -1,0 +1,8 @@
+{
+  "name": "eslint-config-openstax-poland",
+  "version": "0.1.0",
+  "license": "MIT",
+  "peerDependencies": {
+    "eslint": "^6.0.0"
+  }
+}
