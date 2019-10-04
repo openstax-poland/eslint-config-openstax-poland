@@ -1,3 +1,7 @@
+# Copyright 2019 OpenStax Poland
+# Licensed under the MIT license. See LICENSE file in the project root for
+# full license text.
+
 # Enforce best practices and protect against common mistakes.
 #
 # This configuration contains a few rules which could be considered stylistic.
