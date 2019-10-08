@@ -18,6 +18,9 @@ parserOptions:
 # upgrading ESLint.
 extends: eslint:recommended
 
+# Report eslint-disable comments which don't do anything.
+reportUnusedDisableDirectives: true
+
 rules:
   # Check that for each setter there is a corresponding getter.
   accessor-pairs: warn
