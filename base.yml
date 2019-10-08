@@ -21,6 +21,9 @@ extends: eslint:recommended
 # Report eslint-disable comments which don't do anything.
 reportUnusedDisableDirectives: true
 
+plugins:
+  - import
+
 rules:
   # Check that for each setter there is a corresponding getter.
   accessor-pairs: warn
@@ -40,6 +43,26 @@ rules:
   # the stack trace just as an “anonymous function”, which makes debugging more
   # difficult (especially when there are multiple such functions).
   func-names: error
+
+  # Detect mistakes in exporting, such as repeated exports, duplicate names,
+  # or multiple defaults.
+  import/export: error
+
+  # Import statements must precede other statements.
+  import/first: error
+
+  # Forbid imports from absolute paths (beginning with / on unix-compatible
+  # systems or with a drive letter on windows).
+  import/no-absolute-path: error
+
+  # Forbid imports of dependencies not declared in package.json.
+  import/no-extraneous-dependencies: error
+
+  # Forbid a module from importing itself.
+  import/no-self-import: error
+
+  # Use as simple import paths as possible.
+  import/no-useless-path-segments: error
 
   # Forbid use of alert().
   no-alert: error
