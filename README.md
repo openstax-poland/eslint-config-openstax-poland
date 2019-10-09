@@ -30,6 +30,11 @@ ESlint configurations used by OpenStax Poland.
   rules from `eslint-plugin-react`. To use this config you must also add
   `eslint-plugin-react` to your `devDependencies`.
 
+- `openstax-poland/style`: Opinionated style, based on `openstax-poland/base`.
+
+- `openstax-poland/react/style`: Opinionated style, based on
+  `openstax-poland/react/base` and `openstax-poland/style`.
+
 ## Adding a new config
 
 1.  Choose a name for you config. We'll use `my-config` as an example.
