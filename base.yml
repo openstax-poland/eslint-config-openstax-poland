@@ -113,7 +113,10 @@ rules:
   no-import-assign: error
 
   # Forbid use of this outside of a class.
-  no-invalid-this: off
+  no-invalid-this: error
+
+  # Warn against constructing functions in loops.
+  no-loop-func: warn
 
   # Forbid mixing of operators with the same precedence.
   no-mixed-operators: error
@@ -126,6 +129,9 @@ rules:
 
   # Forbid use of new for side effects.
   no-new: error
+
+  # Forbid use of the Function constructor.
+  no-new-func: error
 
   # Prefer object literal over object constructor.
   no-new-object: error
