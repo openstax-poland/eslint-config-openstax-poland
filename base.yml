@@ -112,9 +112,6 @@ rules:
   # a runtime error.
   no-import-assign: error
 
-  # Forbid use of this outside of a class.
-  no-invalid-this: error
-
   # Warn against constructing functions in loops.
   no-loop-func: warn
 
