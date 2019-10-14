@@ -67,10 +67,6 @@ rules:
   # Forbid use of alert().
   no-alert: error
 
-  # Warn when an arrow function's arrow could be confused for a comparison
-  # operator.
-  no-confusing-arrow: warn
-
   # Forbid use of deprecated features.
   no-caller: error
   no-iterator: error
