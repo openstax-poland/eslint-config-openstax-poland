@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "license": "MIT",
   "dependencies": {
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.21.0"
   },
   "peerDependencies": {
-    "eslint": "^6.0.0",
-    "eslint-plugin-react": "^7.15.1"
+    "eslint": "^7.0.0",
+    "eslint-plugin-react": "^7.20.0"
   }
 }

@@ -132,9 +132,6 @@ rules:
   # Forbid use of new Wrapper for primitive type wrappers.
   no-new-wrappers: error
 
-  # Forbid concatenation of strings to __dirname and __filename
-  no-path-concat: error
-
   # Forbid loops in which loop condition never changes.
   no-unmodified-loop-condition: error
 
