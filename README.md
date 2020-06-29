@@ -30,10 +30,17 @@ ESlint configurations used by OpenStax Poland.
   rules from `eslint-plugin-react`. To use this config you must also add
   `eslint-plugin-react` to your `devDependencies`.
 
+- `openstax-poland/typescript/base`: Extends `openstax-poland/base` with
+  additional rules for TypeScript. See [TypeScript](#typescript) for
+  instructions on using this config.
+
 - `openstax-poland/style`: Opinionated style, based on `openstax-poland/base`.
 
 - `openstax-poland/react/style`: Opinionated style, based on
   `openstax-poland/react/base` and `openstax-poland/style`.
+
+- `openstax-poland/typescript/style`: Opinionated style, based on
+  `openstax-poland/typescript/base` and `openstax-poland/style`.
 
 ## Adding a new config
 
@@ -57,3 +64,14 @@ ESlint configurations used by OpenStax Poland.
     ```
 
     This file should be placed in the same directory as `my-config.yml`.
+
+## TypeScript
+
+To use TypeScript configs you must add `@typescript-eslint/eslint-plugin`
+and `@typescript-eslint/parser` to your `devDependencies`, and add the following
+to your ESLint config:
+
+```yaml
+parserOptions:
+  project: relative/path/to/tsconfig.json
+```

@@ -1,0 +1,136 @@
+# Copyright 2019 OpenStax Poland
+# Licensed under the MIT license. See LICENSE file in the project root for
+# full license text.
+
+extends: ./base.yml
+
+rules:
+  # Prefer type[] over Array<type>.
+  '@typescript-eslint/array-type': error
+
+  # Require all class members to be explicitly marked as either public,
+  # protected, or private.
+  '@typescript-eslint/explicit-member-accessibility': error
+
+  # Require non-inferred type annotations on all public APIs. For now warnings
+  # only, as this is a new lint and we aren't sure how well it works. In future
+  # we'd like to turn in into hard error.
+  '@typescript-eslint/explicit-module-boundary-types': warn
+
+  # Don't use member delimiters in interface declarations (for consistency with
+  # class declarations) and comma in type declarations (for consistency with
+  # object literals).
+  '@typescript-eslint/member-delimiter-style':
+    - error
+    - multiline:
+        delimiter: none
+      singleline:
+        delimiter: comma
+      overrides:
+        typeLiteral:
+          multiline:
+            delimiter: comma
+            requireLast: true
+
+  # Enforce consistent naming convention. Since this is a new lint, and defining
+  # a style guide for TS/JS is non-trivial, this is currently only a warning.
+  '@typescript-eslint/naming-convention': warn
+
+  # Disallow unnecessary non-null assertions.
+  '@typescript-eslint/no-extra-non-null-assertion': error
+
+  # Disallow usage of classes as namespaces.
+  '@typescript-eslint/no-extraneous-class': error
+
+  # Forbid comparing against a boolean literal.
+  '@typescript-eslint/no-unnecessary-boolean-literal-compare': error
+
+  # Forbid unnecessary type assertions.
+  '@typescript-eslint/no-unnecessary-type-assertion': error
+
+  # Prefer `literal as const` over `literal as literal`.
+  '@typescript-eslint/prefer-as-const': error
+
+  # Prefer for-of loops over looping with an index.
+  '@typescript-eslint/prefer-for-of': error
+
+  # Prefer a function type over a callable interface if it has no additional
+  # properties.
+  '@typescript-eslint/prefer-function-type': error
+
+  # Prefer Array#includes over Array#indexOf and String#includes over
+  # String#indexOf when checking for presence of an item.
+  '@typescript-eslint/prefer-includes': error
+
+  # Prefer the optional chain operator (?.) over manual check for null before
+  # property access. Currently reported as a warning only because this lint
+  # still occasionally reports false positives.
+  '@typescript-eslint/prefer-optional-chain': warn
+
+  # Private class properties which are never modified should be marked as
+  # readonly (for consistency with prefer-const).
+  '@typescript-eslint/prefer-readonly': error
+
+  # Prefer String#startsWith and String#endsWith over equivalent methods.
+  '@typescript-eslint/prefer-string-starts-ends-with': error
+
+  # Require Promise-returning functions to be marked async.
+  '@typescript-eslint/promise-function-async': error
+
+  # Forbid spaces before type annotations and require a single space after the
+  # colon.
+  '@typescript-eslint/type-annotation-spacing': error
+
+  # ----------------------------------------------------------------------------
+  # Following are typescript-eslint's “extension” rules, which modify default
+  # eslint rules. Remember to update these when changing ../style.yml.
+
+  # Use the “One True Brace Style”
+  brace-style: off
+  '@typescript-eslint/brace-style': error
+
+  # There is no spacing between function name and opening parenthesis.
+  func-call-spacing: off
+  '@typescript-eslint/func-call-spacing': error
+
+  # Use four spaces indentation.
+  indent: off
+  '@typescript-eslint/indent':
+    - error
+    - 4
+      # Align subsequent variables in a declaration to the first
+    - VariableDeclarator: first
+      ignoredNodes:
+      # Conflicts with react/jsx-closing-bracket-location.
+      - JSXOpeningElement
+      # Due to complexities of TypeScript @typescript-eslint/indent doesn't yet
+      # handle all nodes properly. Following is list of nodes with which we had
+      # problems:
+      - TSUnionType
+
+  # Prefer array literal over array constructor.
+  no-array-constructor: off
+  '@typescript-eslint/no-array-constructor': error
+
+  # Forbid extra parenthesis, except when used to make things clearer.
+  no-extra-parens: off
+  '@typescript-eslint/no-extra-parens':
+    - error
+    - all
+    - nestedBinaryExpressions: false
+
+  # Only use semicolons where they would not be inserted by ASI. In those places
+  # semicolon goes at the start of a line.
+  semi: off
+  '@typescript-eslint/semi':
+    - error
+    - never
+    - beforeStatementContinuationChars: always
+
+  # Forbid spaces before the left parenthesis opening a function's parameter
+  # list, except for async arrow functions, where it's required.
+  space-before-function-paren: off
+  '@typescript-eslint/space-before-function-paren':
+    - error
+    - anonymous: never
+      named: never
