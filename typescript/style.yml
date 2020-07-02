@@ -136,3 +136,12 @@ rules:
     - error
     - anonymous: never
       named: never
+
+  # ----------------------------------------------------------------------------
+  # Following are modifications of ../style.yml.
+
+  # This rule is mainly used to ensure that there can't accidentally be two
+  # paths in the same function one returning undefined and one a value.
+  # In TypeScript this is guaranteed by the type system, so a style lint
+  # is unnecessary.
+  consistent-return: off
