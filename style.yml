@@ -121,7 +121,10 @@ rules:
   lines-between-class-members: error
 
   # Limit line width to 80 columns.
-  max-len: error
+  max-len:
+    - error
+    - code: 100
+      comments: 80
 
   # Allow at most one statement per line.
   max-statements-per-line: error
