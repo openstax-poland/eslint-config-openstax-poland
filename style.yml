@@ -76,7 +76,9 @@ rules:
     - error
     - always
     - js: never
+      jsx: never
       ts: never
+      tsx: never
 
   # Enforce an empty line after last import statement.
   import/newline-after-import: error
