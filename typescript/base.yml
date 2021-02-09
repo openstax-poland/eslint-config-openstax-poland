@@ -19,6 +19,9 @@ rules:
   # Forbid potential security vulnerabilities.
   '@typescript-eslint/no-implied-eval': error
 
+  # Warn when using <T extends any> or <T extends unknown>.
+  '@typescript-eslint/no-unnecessary-type-constraint': warn
+
   # Only allow instances of Error to be thrown.
   '@typescript-eslint/no-throw-literal': error
 
@@ -48,6 +51,10 @@ rules:
   default-param-last: off
   '@typescript-eslint/default-param-last': error
 
+  # Forbid duplicate imports.
+  no-duplicate-imports: off
+  '@typescript-eslint/no-duplicate-imports': error
+
   # Warn against using empty functions.
   #
   # Empty functions can be confusing and can be a mistake (e.g. () => {} returns
@@ -59,6 +66,10 @@ rules:
   # and describe why are you using an empty function.
   no-empty-function: off
   '@typescript-eslint/no-empty-function': warn
+
+  # Warn against constructing functions in loops.
+  no-loop-func: off
+  '@typescript-eslint/no-loop-func': warn
 
   # Unused expressions often indicate a logic error.
   no-unused-expressions: off

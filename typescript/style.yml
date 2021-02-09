@@ -91,6 +91,10 @@ rules:
   brace-style: off
   '@typescript-eslint/brace-style': error
 
+  # Require dangling comma in multi-line expressions.
+  comma-dangle: off
+  '@typescript-eslint/comma-dangle': [error, always-multiline]
+
   # There is no spacing between function name and opening parenthesis.
   func-call-spacing: off
   '@typescript-eslint/func-call-spacing': error
@@ -121,6 +125,10 @@ rules:
     - all
     - nestedBinaryExpressions: false
 
+  # Require consistent use of line breaks in object expressions.
+  object-curly-spacing: off
+  '@typescript-eslint/object-curly-spacing': [error, always]
+
   # Only use semicolons where they would not be inserted by ASI. In those places
   # semicolon goes at the start of a line.
   semi: off
@@ -136,6 +144,10 @@ rules:
     - error
     - anonymous: never
       named: never
+
+  # Disable until we can use PEP8-style spacing for default arguments.
+  # space-infix-ops: off
+  # '@typescript-eslint/space-infix-ops': error
 
   # ----------------------------------------------------------------------------
   # Following are modifications of ../style.yml.
