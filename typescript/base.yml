@@ -82,6 +82,7 @@ rules:
     - functions: false
       classes: false
       variables: false
+      typedefs: false
 
   # Forbid empty constructors.
   no-useless-constructor: off
