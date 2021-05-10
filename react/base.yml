@@ -13,7 +13,7 @@ extends:
 
 settings:
   react:
-    version: 16.2.0
+    version: 16.14.0
 
 rules:
   # Forbid use of .bind() and arrow functions as JSX callbacks, as they are not
@@ -59,3 +59,7 @@ rules:
 
   # Disallow passing children to void DOM elements.
   react/void-dom-elements-no-children: error
+
+  # Starting with React 17 (and 16.14) a new JSX transform was introduced, which
+  # doesn't require React to be in scope.
+  react/react-in-jsx-scope: off
