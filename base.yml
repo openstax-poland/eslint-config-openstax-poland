@@ -1,0 +1,210 @@
+# Copyright 2019 OpenStax Poland
+# Licensed under the MIT license. See LICENSE file in the project root for
+# full license text.
+
+# Enforce best practices and protect against common mistakes.
+#
+# This configuration contains a few rules which could be considered stylistic.
+# In those cases the reason for their inclusion is stated in the comment.
+
+# Use ES6 everywhere.
+env:
+  es6: true
+parserOptions:
+  sourceType: module
+  ecmaVersion: 2018
+
+# Use ESLint's recommendations. Remember to review changes to them when
+# upgrading ESLint.
+extends: eslint:recommended
+
+# Report eslint-disable comments which don't do anything.
+reportUnusedDisableDirectives: true
+
+plugins:
+  - import
+
+rules:
+  # Check that for each setter there is a corresponding getter.
+  accessor-pairs: warn
+
+  # Require default case to be present in each switch statement.
+  default-case: error
+
+  # Force all default parameters to come last.
+  default-param-last: error
+
+  # Only use type-safe equality operators.
+  eqeqeq: [error, smart]
+
+  # Require all functions to have a name.
+  #
+  # When an error is thrown in an anonymous function, it will be described in
+  # the stack trace just as an “anonymous function”, which makes debugging more
+  # difficult (especially when there are multiple such functions).
+  func-names: error
+
+  # Detect mistakes in exporting, such as repeated exports, duplicate names,
+  # or multiple defaults.
+  import/export: error
+
+  # Import statements must precede other statements.
+  import/first: error
+
+  # Forbid imports from absolute paths (beginning with / on unix-compatible
+  # systems or with a drive letter on windows).
+  import/no-absolute-path: error
+
+  # Forbid imports of dependencies not declared in package.json.
+  import/no-extraneous-dependencies: error
+
+  # Forbid a module from importing itself.
+  import/no-self-import: error
+
+  # Use as simple import paths as possible.
+  import/no-useless-path-segments: error
+
+  # Forbid use of alert().
+  no-alert: error
+
+  # Forbid use of deprecated features.
+  no-caller: error
+  no-iterator: error
+  no-octal-escape: error
+  no-proto: error
+
+  # Forbid duplicate imports.
+  no-duplicate-imports: error
+
+  # Forbid potential security vulnerabilities.
+  no-eval: error
+  no-implied-eval: error
+  no-script-url: error
+
+  # Warn against using empty functions.
+  #
+  # Empty functions can be confusing and can be a mistake (e.g. () => {} returns
+  # undefined, not an empty object). In case when you do intentionally want to
+  # use an empty function, disable this rule with
+  #
+  #   /* eslint-disable-next-line no-empty-function */
+  #
+  # and describe why are you using an empty function.
+  no-empty-function: warn
+
+  # Forbid extending prototypes of build-in objects.
+  no-extend-native: error
+
+  # Forbid unnecessary function binding.
+  no-extra-bind: error
+
+  # Forbid unnecessary labels.
+  no-extra-label: error
+
+  # Forbid implicit type coercion
+  no-implicit-coercion: error
+
+  # Imported names are declared as read-only, and reassigning them causes
+  # a runtime error.
+  no-import-assign: error
+
+  # Warn against constructing functions in loops.
+  no-loop-func: warn
+
+  # Forbid mixing of operators with the same precedence.
+  no-mixed-operators: error
+
+  # Forbid sequences of multiple spaces.
+  #
+  # Multiple spaces are usually inserted by mistake, and are a common source of
+  # diff noise.
+  no-multi-spaces: warn
+
+  # Forbid use of new for side effects.
+  no-new: error
+
+  # Forbid use of the Function constructor.
+  no-new-func: error
+
+  # Prefer object literal over object constructor.
+  no-new-object: error
+
+  # Forbid use of new Wrapper for primitive type wrappers.
+  no-new-wrappers: error
+
+  # Forbid loops in which loop condition never changes.
+  no-unmodified-loop-condition: error
+
+  # Forbid ternary operator when simpler alternatives exist.
+  no-unneeded-ternary: error
+
+  # Unused expressions often indicate a logic error.
+  no-unused-expressions: error
+
+  # Forbid use of names before they are defined, except at the top level.
+  no-use-before-define:
+    - error
+    - functions: false
+      classes: false
+      variables: false
+
+  # Forbid uses of .call and .apply when not necessary.
+  no-useless-call: error
+
+  # Forbid computed key with a literal.
+  no-useless-computed-key: error
+
+  # Forbid empty constructors.
+  no-useless-constructor: error
+
+  # Forbid renaming to the same name.
+  no-useless-rename: error
+
+  # Forbid return statements which have no effect on control flow.
+  no-useless-return: error
+
+  # Forbid assignment in return statements.
+  no-return-assign: error
+
+  # Forbid await expressions in return statements.
+  no-return-await: error
+
+  # Forbid comparing a value against itself.
+  no-self-compare: error
+
+  # Forbid use of the comma operator.
+  no-sequences: error
+
+  # Only allow instances of Error to be thrown.
+  no-throw-literal: error
+
+  # Forbid tailing whitespace.
+  #
+  # Tailing whitespace often gets introduced by accident when editing (since it
+  # usually not displayed or marked in any way), and is a common source of diff
+  # noise.
+  no-trailing-spaces: error
+
+  # Forbid use of the var keyword.
+  no-var: error
+
+  # Prefer numeric literals over Number.parseInt.
+  prefer-numeric-literals: error
+
+  # Forbid non-Error values as arguments to Promise.reject().
+  prefer-promise-reject-errors: error
+
+  # Disallow constructing RegExp from a string literal.
+  prefer-regex-literals: error
+
+  # Prefer arguments spread over the arguments variable.
+  prefer-rest-params: error
+
+  # Forbid Unicode BOM.
+  unicode-bom: error
+
+  # Require that each async function have an await expression.
+  require-await: error
+
+  # Require that each generator function have an await expression.
+  require-yield: error
