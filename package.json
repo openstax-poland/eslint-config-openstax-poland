@@ -11,7 +11,7 @@
     "typescript"
   ],
   "dependencies": {
-    "eslint-plugin-import": "=2.21.0"
+    "eslint-plugin-import": "^2.26.0"
   },
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.0.0",
