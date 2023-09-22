@@ -21,6 +21,15 @@ ESlint configurations used by OpenStax Poland.
     extends: openstax-poland/base
     ```
 
+3.  You may also need to add the following configuration if you're using Yarn
+    PnP:
+
+    ```yaml
+    settings:
+      # Consider PnP-installed modules as external
+      import/external-module-folders: ["node_modules", ".yarn"]
+    ```
+
 ## Configs:
 
 - `openstax-poland/base`: Extends `eslint:recommended` with additional best

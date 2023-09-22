@@ -24,6 +24,10 @@ reportUnusedDisableDirectives: true
 plugins:
   - import
 
+settings:
+  # Consider PnP-installed modules as external
+  import/external-module-folders: ["node_modules", ".yarn"]
+
 rules:
   # Check that for each setter there is a corresponding getter.
   accessor-pairs: warn
@@ -51,12 +55,26 @@ rules:
   # Import statements must precede other statements.
   import/first: error
 
+  # Forbid imports of names which don't exist in imported modules
+  import/named: error
+
   # Forbid imports from absolute paths (beginning with / on unix-compatible
   # systems or with a drive letter on windows).
   import/no-absolute-path: error
 
+  # Forbid use of the commonjs module system if it can be replaced with ES5
+  # import/export statements
+  import/no-commonjs: error
+
+  # Forbid duplicate imports
+  no-duplicate-imports: off
+  import/no-duplicates: error
+
   # Forbid imports of dependencies not declared in package.json.
   import/no-extraneous-dependencies: error
+
+  # Forbid use of module.exports in ES5 modules
+  import/no-import-module-exports: error
 
   # Forbid a module from importing itself.
   import/no-self-import: error
@@ -72,9 +90,6 @@ rules:
   no-iterator: error
   no-octal-escape: error
   no-proto: error
-
-  # Forbid duplicate imports.
-  no-duplicate-imports: error
 
   # Forbid potential security vulnerabilities.
   no-eval: error
@@ -140,6 +155,12 @@ rules:
 
   # Unused expressions often indicate a logic error.
   no-unused-expressions: error
+
+  # Forbid unused variables, except when used in a
+  # `const { var, ...rest } = expr` to exclude some names from an object
+  no-unused-vars:
+    - error
+    - ignoreRestSiblings: true
 
   # Forbid use of names before they are defined, except at the top level.
   no-use-before-define:

@@ -81,7 +81,17 @@ rules:
       tsx: never
 
   # Enforce an empty line after last import statement.
-  import/newline-after-import: error
+  import/newline-after-import:
+    - error
+    - considerComments: true
+
+  # Require all default exports to be named
+  import/no-anonymous-default-export:
+    - error
+    - allowCallExpression: false
+
+  # Forbid import {} from '..'
+  import/no-empty-named-blocks: error
 
   # Prefer import name over import { default as name }.
   import/no-named-default: error

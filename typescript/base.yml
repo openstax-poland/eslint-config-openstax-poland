@@ -7,9 +7,20 @@ parser: '@typescript-eslint/parser'
 extends:
   - ../base.yml
   - plugin:import/typescript
-  - plugin:@typescript-eslint/recommended
+  - plugin:@typescript-eslint/recommended-type-checked
 
 rules:
+  # Require all overload signatures to be next to each other
+  '@typescript-eslint/adjacent-overload-signatures': error
+
+  # Warn when calling toString (including implicitly) on a value which is known
+  # to produce useless output (eg. `"[object object]"`)
+  '@typescript-eslint/no-base-to-string': warn
+
+  # Forbid type assertions which may be mistaken for non-equality comparison:
+  # `lhs! == rhs` vs `lhs !== rhs`
+  '@typescript-eslint/no-confusing-non-null-assertion': error
+
   # Forbid use of the any type.
   '@typescript-eslint/no-explicit-any': warn
 
@@ -22,11 +33,20 @@ rules:
   # Warn when using <T extends any> or <T extends unknown>.
   '@typescript-eslint/no-unnecessary-type-constraint': warn
 
+  # Warn only because of false positives when using .bind
+  '@typescript-eslint/no-unsafe-assignment': warn
+  '@typescript-eslint/no-unsafe-argument': warn
+
+  # Forbid `export {}` when it is not needed to turn a file into a module
+  '@typescript-eslint/no-useless-empty-export': error
+
   # Only allow instances of Error to be thrown.
   '@typescript-eslint/no-throw-literal': error
 
   # Prefer TS 3.7's nullish coalescing operator (`??`) over logical OR (`||`).
-  '@typescript-eslint/prefer-nullish-coalescing': error
+  #
+  # Warn only because it has too many false-positives.
+  '@typescript-eslint/prefer-nullish-coalescing': warn
 
   # Require calls to Array#sort to provide a comparator function.
   '@typescript-eslint/require-array-sort-compare': error
@@ -51,9 +71,8 @@ rules:
   default-param-last: off
   '@typescript-eslint/default-param-last': error
 
-  # Forbid duplicate imports.
-  no-duplicate-imports: off
-  '@typescript-eslint/no-duplicate-imports': error
+  # Handled by TS itself
+  import/named: off
 
   # Warn against using empty functions.
   #
@@ -74,6 +93,13 @@ rules:
   # Unused expressions often indicate a logic error.
   no-unused-expressions: off
   '@typescript-eslint/no-unused-expressions': error
+
+  # Forbid unused variables, except when used in a
+  # `const { var, ...rest } = expr` to exclude some names from an object
+  no-unused-vars: off
+  '@typescript-eslint/no-unused-vars':
+    - error
+    - ignoreRestSiblings: true
 
   # Forbid use of names before they are defined, except at the top level.
   no-use-before-define: off

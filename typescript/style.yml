@@ -10,6 +10,12 @@ rules:
   # Prefer type[] over Array<type>.
   '@typescript-eslint/array-type': error
 
+  # Prefer `expr as type` over `<type> expr`
+  '@typescript-eslint/consistent-type-assertions':
+    - error
+    - assertionStyle: as
+      objectLiteralTypeAssertions: allow-as-parameter
+
   # Require all class members to be explicitly marked as either public,
   # protected, or private.
   '@typescript-eslint/explicit-member-accessibility': error
@@ -49,6 +55,9 @@ rules:
 
   # Forbid unnecessary type assertions.
   '@typescript-eslint/no-unnecessary-type-assertion': error
+
+  # Prefer `expr!` over `expr as type` when `expr` is nullable
+  '@typescript-eslint/non-nullable-type-assertion-style': error
 
   # Prefer `literal as const` over `literal as literal`.
   '@typescript-eslint/prefer-as-const': error
@@ -95,6 +104,12 @@ rules:
   comma-dangle: off
   '@typescript-eslint/comma-dangle': [error, always-multiline]
 
+  comma-spacing: off
+  '@typescript-eslint/comma-spacing': error
+
+  dot-notation: off
+  '@typescript-eslint/dot-notation': error
+
   # There is no spacing between function name and opening parenthesis.
   func-call-spacing: off
   '@typescript-eslint/func-call-spacing': error
@@ -113,6 +128,12 @@ rules:
       # handle all nodes properly. Following is list of nodes with which we had
       # problems:
       - TSUnionType
+
+  keyword-spacing: off
+  '@typescript-eslint/keyword-spacing': error
+
+  lines-between-class-members: off
+  '@typescript-eslint/lines-between-class-members': error
 
   # Prefer array literal over array constructor.
   no-array-constructor: off
