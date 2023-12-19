@@ -15,6 +15,15 @@ settings:
     version: 16.14.0
 
 rules:
+  # Default value of type is "submit", which may cause unexpected page reloads
+  react/button-has-type: error
+
+  # Force specifying iframe sandbox, a good security practice
+  react/iframe-missing-sandbox: error
+
+  # Ensure consistent indentation in JSX props
+  react/jsx-indent-props: error
+
   # Require closing backed to be aligned with properties, and closing tag with
   # opening tag.
   react/jsx-closing-bracket-location: [error, props-aligned]
@@ -56,8 +65,19 @@ rules:
   # comparable and can cause unnecessary re-renders.
   react/jsx-no-bind: error
 
+  # Forbid non-stable values being used as context, as they can cause costly
+  # unintentional re-renders.
+  react/jsx-no-constructed-context-values: error
+
+  # Forbid attempts at conditional rendering which may accidentally render the
+  # condition instead (e.g. value && <Something />).
+  react/jsx-no-leaked-render: error
+
   # Forbid uses of fragments with a single child element.
   react/jsx-no-useless-fragment: error
+
+  # Require consistent spacing within JSX tags
+  react/jsx-tag-spacing: error
 
   # Disallow multiple spaces between JSX props.
   react/jsx-props-no-multi-spaces: error
@@ -65,10 +85,17 @@ rules:
   # Warn against dangerous usage of this.state in calls to this.setState.
   react/no-access-state-in-setstate: warn
 
+  # Forbid usages of array indexes as keys.
+  react/no-array-index-key: error
+
   # Warn against uses of this.setState within componentDidMount and
   # componentDidUpdate, as this will trigger an additional render.
   react/no-did-mount-set-state: warn
   react/no-did-update-set-state: warn
+
+  # Forbid uses of non-primitive values as prop defaults, as this could cause
+  # infinite re-render loops.
+  react/no-object-type-as-default-prop: error
 
   # Properties in state must be used.
   react/no-unused-state: error

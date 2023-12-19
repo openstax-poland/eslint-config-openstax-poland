@@ -12,7 +12,7 @@ env:
   es6: true
 parserOptions:
   sourceType: module
-  ecmaVersion: 2018
+  ecmaVersion: latest
 
 # Use ESLint's recommendations. Remember to review changes to them when
 # upgrading ESLint.
@@ -73,6 +73,9 @@ rules:
   # Require default case to be present in each switch statement.
   default-case: error
 
+  # Require default case to be the last branch of a switch condition
+  default-case-last: error
+
   # Force all default parameters to come last.
   default-param-last: error
 
@@ -108,6 +111,10 @@ rules:
     - error
     - anonymous: neither
       method: before
+
+  # Require accessor pairs to be declared together, without other members in
+  # between
+  grouped-accessor-pairs: error
 
   # When using arrow functions with implicit return (without braces) the value
   # must be placed on the same line as arrow token.
@@ -252,6 +259,12 @@ rules:
     - error
     - allow: [warn, error]
 
+  # Useless binary expressions are likely indication of a programming mistake
+  no-constant-binary-expression: error
+
+  # Forbid returning values from constructors
+  no-constructor-return: error
+
   # Forbid else { return }
   no-else-return: error
 
@@ -265,6 +278,9 @@ rules:
   #
   # and describe why are you using an empty function.
   no-empty-function: warn
+
+  # Forbid empty static {} blocks
+  no-empty-static-block: error
 
   # Forbid extending prototypes of build-in objects.
   no-extend-native: error
@@ -315,11 +331,21 @@ rules:
   # Forbid use of the Function constructor.
   no-new-func: error
 
+  # Prevent accidental attempts to invoke new on non-constructive singletons
+  no-new-native-nonconstructor: error
+
   # Prefer object literal over object constructor.
   no-new-object: error
 
   # Forbid use of new Wrapper for primitive type wrappers.
   no-new-wrappers: error
+
+  # Forbid most usages of the Object() constructor
+  no-object-constructor: error
+
+  # Forbid returning values from promise executors, as it's likely a mistake (
+  # their return value is never used)
+  no-promise-executor-return: error
 
   # Forbid initializing variables to undefined.
   no-undef-init: error
@@ -330,6 +356,9 @@ rules:
   # Forbid ternary operator when simpler alternatives exist.
   no-unneeded-ternary: error
 
+  # Forbid loops which are not actually loops
+  no-unreachable-loop: error
+
   # Unused expressions often indicate a logic error.
   no-unused-expressions: error
 
@@ -338,6 +367,9 @@ rules:
   no-unused-vars:
     - error
     - ignoreRestSiblings: true
+
+  # Forbid private class members which are never used
+  no-unused-private-class-members: error
 
   # Forbid use of names before they are defined, except at the top level.
   no-use-before-define:
@@ -420,8 +452,14 @@ rules:
     - error
     - destructuring: all
 
+  # Prefer x ** y over Math.pow(x, y)
+  prefer-exponentiation-operator: error
+
   # Prefer numeric literals over Number.parseInt.
   prefer-numeric-literals: error
+
+  # Prefer Object.hasOwn over Object.prototype.hasOwnProperty
+  prefer-object-has-own: warn
 
   # Prefer object spread syntax over Object.assign
   prefer-object-spread: error
