@@ -1,4 +1,4 @@
-# Copyright 2019 OpenStax Poland
+# Copyright 2023 OpenStax Poland
 # Licensed under the MIT license. See LICENSE file in the project root for
 # full license text.
 
@@ -32,14 +32,64 @@ rules:
   # Check that for each setter there is a corresponding getter.
   accessor-pairs: warn
 
+  # Require consistent use of line breaks in array expressions.
+  array-bracket-newline: [error, consistent]
+  array-element-newline: [error, consistent]
+
+  # There should be no spaces between array brackets and its content.
+  array-bracket-spacing: error
+
+  # Forbid braces around an arrow function's body unless necessary.
+  arrow-body-style: error
+
+  # Forbid parentheses in arrow functions with a single argument.
+  arrow-parens: [error, as-needed]
+
+  # Require a space before and after the arrow token.
+  arrow-spacing: error
+
+  # Require consistent use of line breaks in object expressions.
+  block-spacing: error
+
+  # Use the “One True Brace Style”
+  brace-style: error
+
+  # Require dangling comma in multi-line expressions.
+  comma-dangle: [error, always-multiline]
+
+  # Single space after a comma, no spaces before.
+  comma-spacing: error
+
+  # No spaces inside computed property brackets.
+  computed-property-spacing: error
+
+  # Ensure return statements are used consistently with or without a value.
+  consistent-return: error
+
+  # Require curly braces only around multiline bodies, and require that they
+  # be used consistently across branches.
+  curly: [error, multi-line, consistent]
+
   # Require default case to be present in each switch statement.
   default-case: error
 
   # Force all default parameters to come last.
   default-param-last: error
 
+  # In a multiline property access the dot operator attaches to property name.
+  dot-location: [error, property]
+
+  # Require that properties be accessed via the dot operator when possible.
+  dot-notation: error
+
   # Only use type-safe equality operators.
   eqeqeq: [error, smart]
+
+  # Require empty line at end of file.
+  eol-last: error
+
+  # There is no spacing between function name and opening parenthesis.
+  func-call-spacing: error
 
   # Require all functions to have a name.
   #
@@ -48,9 +98,34 @@ rules:
   # difficult (especially when there are multiple such functions).
   func-names: error
 
+  # Require consistent use of newlines between function call arguments.
+  function-call-argument-newline: [error, consistent]
+
+  # In generator functions star is placed next to the function token and there
+  # is a space between star and functions name. In generator methods star
+  # is placed next to the method name.
+  generator-star-spacing:
+    - error
+    - anonymous: neither
+      method: before
+
+  # When using arrow functions with implicit return (without braces) the value
+  # must be placed on the same line as arrow token.
+  implicit-arrow-linebreak: error
+
   # Detect mistakes in exporting, such as repeated exports, duplicate names,
   # or multiple defaults.
   import/export: error
+
+  # Import paths shouldn't use extensions when importing JavaScript modules,
+  # and should use extensions in all other cases.
+  import/extensions:
+    - error
+    - always
+    - js: never
+      jsx: never
+      ts: never
+      tsx: never
 
   # Import statements must precede other statements.
   import/first: error
@@ -58,9 +133,19 @@ rules:
   # Forbid imports of names which don't exist in imported modules
   import/named: error
 
+  # Enforce an empty line after last import statement.
+  import/newline-after-import:
+    - error
+    - considerComments: true
+
   # Forbid imports from absolute paths (beginning with / on unix-compatible
   # systems or with a drive letter on windows).
   import/no-absolute-path: error
+
+  # Require all default exports to be named
+  import/no-anonymous-default-export:
+    - error
+    - allowCallExpression: false
 
   # Forbid use of the commonjs module system if it can be replaced with ES5
   # import/export statements
@@ -70,17 +155,80 @@ rules:
   no-duplicate-imports: off
   import/no-duplicates: error
 
+  # Forbid import {} from '..'
+  import/no-empty-named-blocks: error
+
   # Forbid imports of dependencies not declared in package.json.
   import/no-extraneous-dependencies: error
 
   # Forbid use of module.exports in ES5 modules
   import/no-import-module-exports: error
 
+  # Prefer import name over import { default as name }.
+  import/no-named-default: error
+
   # Forbid a module from importing itself.
   import/no-self-import: error
 
   # Use as simple import paths as possible.
   import/no-useless-path-segments: error
+
+  import/order:
+    - error
+    - newlines-between: always
+      groups:
+        - ["builtin", "external", "unknown"]
+        - ["internal", "parent", "sibling", "index"]
+
+  sort-imports:
+    - error
+    - ignoreCase: true
+      ignoreDeclarationSort: true
+
+  # Use four spaces indentation.
+  indent:
+    - error
+    - 4
+      # Align subsequent variables in a declaration to the first
+    - VariableDeclarator: first
+      ignoredNodes:
+      # Conflicts with react/jsx-closing-bracket-location.
+      - JSXOpeningElement
+
+  # No spaces before colon, one space after colon.
+  key-spacing: error
+
+  # Single space at either end of a keyword.
+  keyword-spacing: error
+
+  # Use Unix style line breaks.
+  linebreak-style: error
+
+  # Require spacing between class members.
+  lines-between-class-members: error
+
+  # Limit line width to 80 columns.
+  max-len:
+    - error
+    - code: 100
+      comments: 80
+
+  # Allow at most one statement per line.
+  max-statements-per-line: error
+
+  # Use sequences of line comments for multi-line comments
+  multiline-comment-style: [error, separate-lines]
+
+  # Require condition and each of the operands of a ternary expression to either
+  # be in a single line or each in a separate line.
+  multiline-ternary: [error, always-multiline]
+
+  # Require parentheses in new expressions.
+  new-parens: error
+
+  # Require each chained call (for chains longer than 3) to be on a separate
+  # line.
+  newline-per-chained-call: error
 
   # Forbid use of alert().
   no-alert: error
@@ -95,6 +243,17 @@ rules:
   no-eval: error
   no-implied-eval: error
   no-script-url: error
+
+  # Prefer array literal over array constructor.
+  no-array-constructor: error
+
+  # Forbid use of console, except for logging problems.
+  no-console:
+    - error
+    - allow: [warn, error]
+
+  # Forbid else { return }
+  no-else-return: error
 
   # Warn against using empty functions.
   #
@@ -116,12 +275,24 @@ rules:
   # Forbid unnecessary labels.
   no-extra-label: error
 
+  # Forbid extra parenthesis, except when used to make things clearer.
+  no-extra-parens:
+    - error
+    - all
+    - nestedBinaryExpressions: false
+
   # Forbid implicit type coercion
   no-implicit-coercion: error
 
   # Imported names are declared as read-only, and reassigning them causes
   # a runtime error.
   no-import-assign: error
+
+  # Forbid unnecessary use of blocks.
+  no-lone-blocks: error
+
+  # Forbid else blocks with a single if clause. Use else if instead.
+  no-lonely-if: error
 
   # Warn against constructing functions in loops.
   no-loop-func: warn
@@ -135,6 +306,9 @@ rules:
   # diff noise.
   no-multi-spaces: warn
 
+  # Forbid consecutive empty lines.
+  no-multiple-empty-lines: error
+
   # Forbid use of new for side effects.
   no-new: error
 
@@ -146,6 +320,9 @@ rules:
 
   # Forbid use of new Wrapper for primitive type wrappers.
   no-new-wrappers: error
+
+  # Forbid initializing variables to undefined.
+  no-undef-init: error
 
   # Forbid loops in which loop condition never changes.
   no-unmodified-loop-condition: error
@@ -196,6 +373,9 @@ rules:
   # Forbid use of the comma operator.
   no-sequences: error
 
+  # Forbid use of the tab character.
+  no-tabs: error
+
   # Only allow instances of Error to be thrown.
   no-throw-literal: error
 
@@ -209,8 +389,42 @@ rules:
   # Forbid use of the var keyword.
   no-var: error
 
+  # There should be no spaces around the dot operator, except indentation.
+  no-whitespace-before-property: error
+
+  # Require consistent use of line breaks in object expressions.
+  object-curly-newline:
+    - error
+    - multiline: true
+      consistent: true
+  object-curly-spacing: [error, always]
+
+  # Require use of object shorthand syntax.
+  object-shorthand: error
+
+  # Only allow one variable declaration per line when they are initialized.
+  one-var-declaration-per-line: error
+
+  # In multiline binary expressions operator is always at the beginning of
+  # a line.
+  operator-linebreak: [error, before]
+
+  # Disallow “block padding”
+  padded-blocks: [error, never]
+
+  # Prefer arrow functions over function expressions as callbacks.
+  prefer-arrow-callback: error
+
+  # Variables which are never assigned should be declared const.
+  prefer-const:
+    - error
+    - destructuring: all
+
   # Prefer numeric literals over Number.parseInt.
   prefer-numeric-literals: error
+
+  # Prefer object spread syntax over Object.assign
+  prefer-object-spread: error
 
   # Forbid non-Error values as arguments to Promise.reject().
   prefer-promise-reject-errors: error
@@ -221,6 +435,52 @@ rules:
   # Prefer arguments spread over the arguments variable.
   prefer-rest-params: error
 
+  # Prefer argument spread over calling .apply()
+  prefer-spread: error
+
+  # Forbid spaces between the rest operator and its argument.
+  rest-spread-spacing: error
+
+  # Only quote properties when needed.
+  quote-props: [error, as-needed]
+
+  # Only use semicolons where they would not be inserted by ASI. In those places
+  # semicolon goes at the start of a line.
+  semi:
+    - error
+    - never
+    - beforeStatementContinuationChars: always
+  semi-style: [error, first]
+
+  # There should always be a space before a block's opening brace.
+  space-before-blocks: error
+
+  # Forbid spaces before the left parenthesis opening a function's parameter
+  # list, except for async arrow functions, where it's required.
+  space-before-function-paren:
+    - error
+    - anonymous: never
+      named: never
+
+  # Forbid spaces within parentheses.
+  space-in-parens: error
+
+  # Disable until we can use PEP8-style spacing for default arguments.
+  # space-infix-ops: error
+
+  # Require spaces around word prefix operators (new, void, etc.), and a space
+  # before and no spaces after non-word prefix operators.
+  space-unary-ops: error
+
+  # Require a space after the initial //, /*, or /** of a comment.
+  spaced-comment: error
+
+  # Require space after case colon, and no spaces before it.
+  switch-colon-spacing: error
+
+  # Forbid spaces between template literal and its tag.
+  template-tag-spacing: error
+
   # Forbid Unicode BOM.
   unicode-bom: error
 
@@ -229,3 +489,7 @@ rules:
 
   # Require that each generator function have an await expression.
   require-yield: error
+
+  # There are no spaces between yield and star, and there is space between star
+  # and argument.
+  yield-star-spacing: error

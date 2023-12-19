@@ -35,21 +35,13 @@ ESlint configurations used by OpenStax Poland.
 - `openstax-poland/base`: Extends `eslint:recommended` with additional best
   practices. Designed to contain as few stylistic rules as possible.
 
-- `openstax-poland/react/base`: Extends `openstax-poland/base` with additional
+- `openstax-poland/react`: Extends `openstax-poland/base` with additional
   rules from `eslint-plugin-react`. To use this config you must also add
   `eslint-plugin-react` to your `devDependencies`.
 
-- `openstax-poland/typescript/base`: Extends `openstax-poland/base` with
+- `openstax-poland/typescript`: Extends `openstax-poland/base` with
   additional rules for TypeScript. See [TypeScript](#typescript) for
   instructions on using this config.
-
-- `openstax-poland/style`: Opinionated style, based on `openstax-poland/base`.
-
-- `openstax-poland/react/style`: Opinionated style, based on
-  `openstax-poland/react/base` and `openstax-poland/style`.
-
-- `openstax-poland/typescript/style`: Opinionated style, based on
-  `openstax-poland/typescript/base` and `openstax-poland/style`.
 
 ## Adding a new config
 

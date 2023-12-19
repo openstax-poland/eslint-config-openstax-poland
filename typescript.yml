@@ -1,12 +1,17 @@
-# Copyright 2019 OpenStax Poland
+# Copyright 2023 OpenStax Poland
 # Licensed under the MIT license. See LICENSE file in the project root for
 # full license text.
 
+parser: '@typescript-eslint/parser'
+
 extends:
-  - ../style.yml
-  - ./base.yml
+  - plugin:import/typescript
+  - plugin:@typescript-eslint/recommended-type-checked
 
 rules:
+  # Require all overload signatures to be next to each other
+  '@typescript-eslint/adjacent-overload-signatures': error
+
   # Prefer type[] over Array<type>.
   '@typescript-eslint/array-type': error
 
@@ -44,11 +49,31 @@ rules:
   # a style guide for TS/JS is non-trivial, this is currently only a warning.
   '@typescript-eslint/naming-convention': warn
 
+  # Warn when calling toString (including implicitly) on a value which is known
+  # to produce useless output (eg. `"[object object]"`)
+  '@typescript-eslint/no-base-to-string': warn
+
+  # Forbid type assertions which may be mistaken for non-equality comparison:
+  # `lhs! == rhs` vs `lhs !== rhs`
+  '@typescript-eslint/no-confusing-non-null-assertion': error
+
+  # Forbid use of the any type.
+  '@typescript-eslint/no-explicit-any': warn
+
   # Disallow unnecessary non-null assertions.
   '@typescript-eslint/no-extra-non-null-assertion': error
 
   # Disallow usage of classes as namespaces.
   '@typescript-eslint/no-extraneous-class': error
+
+  # Require errors in promises to be handled.
+  '@typescript-eslint/no-floating-promises': error
+
+  # Forbid potential security vulnerabilities.
+  '@typescript-eslint/no-implied-eval': error
+
+  # Prefer `expr!` over `expr as type` when `expr` is nullable
+  '@typescript-eslint/non-nullable-type-assertion-style': error
 
   # Forbid comparing against a boolean literal.
   '@typescript-eslint/no-unnecessary-boolean-literal-compare': error
@@ -56,8 +81,18 @@ rules:
   # Forbid unnecessary type assertions.
   '@typescript-eslint/no-unnecessary-type-assertion': error
 
-  # Prefer `expr!` over `expr as type` when `expr` is nullable
-  '@typescript-eslint/non-nullable-type-assertion-style': error
+  # Warn when using <T extends any> or <T extends unknown>.
+  '@typescript-eslint/no-unnecessary-type-constraint': warn
+
+  # Warn only because of false positives when using .bind
+  '@typescript-eslint/no-unsafe-assignment': warn
+  '@typescript-eslint/no-unsafe-argument': warn
+
+  # Forbid `export {}` when it is not needed to turn a file into a module
+  '@typescript-eslint/no-useless-empty-export': error
+
+  # Only allow instances of Error to be thrown.
+  '@typescript-eslint/no-throw-literal': error
 
   # Prefer `literal as const` over `literal as literal`.
   '@typescript-eslint/prefer-as-const': error
@@ -72,6 +107,11 @@ rules:
   # Prefer Array#includes over Array#indexOf and String#includes over
   # String#indexOf when checking for presence of an item.
   '@typescript-eslint/prefer-includes': error
+
+  # Prefer TS 3.7's nullish coalescing operator (`??`) over logical OR (`||`).
+  #
+  # Warn only because it has too many false-positives.
+  '@typescript-eslint/prefer-nullish-coalescing': warn
 
   # Prefer the optional chain operator (?.) over manual check for null before
   # property access. Currently reported as a warning only because this lint
@@ -88,13 +128,28 @@ rules:
   # Require Promise-returning functions to be marked async.
   '@typescript-eslint/promise-function-async': error
 
+  # Require calls to Array#sort to provide a comparator function.
+  '@typescript-eslint/require-array-sort-compare': error
+
+  # Require switch statements to cover all possible cases.
+  '@typescript-eslint/switch-exhaustiveness-check': error
+
   # Forbid spaces before type annotations and require a single space after the
   # colon.
   '@typescript-eslint/type-annotation-spacing': error
 
+  # Warn when two or more overloads could be unified into a single function
+  # using a union, an optional, or a rest parameter.
+  '@typescript-eslint/unified-signatures': warn
+
+  # ----------------------------------------------------------------------------
+  # Following are ESlint rules which are handled by TypeScript itself, and as
+  # such unnecessary.
+  consistent-return: off
+
   # ----------------------------------------------------------------------------
   # Following are typescript-eslint's “extension” rules, which modify default
-  # eslint rules. Remember to update these when changing ../style.yml.
+  # eslint rules. Remember to update these when changing ../base.yml.
 
   # Use the “One True Brace Style”
   brace-style: off
@@ -107,12 +162,24 @@ rules:
   comma-spacing: off
   '@typescript-eslint/comma-spacing': error
 
+  # Enforces default case even when it's provable not necessary. Exhaustiveness
+  # of switch statements is also now enforced by
+  # @typescript-eslint/switch-exhaustiveness-check.
+  default-case: off
+
   dot-notation: off
   '@typescript-eslint/dot-notation': error
 
   # There is no spacing between function name and opening parenthesis.
   func-call-spacing: off
   '@typescript-eslint/func-call-spacing': error
+
+  # Force all default parameters to come last.
+  default-param-last: off
+  '@typescript-eslint/default-param-last': error
+
+  # Handled by TS itself
+  import/named: off
 
   # Use four spaces indentation.
   indent: off
@@ -139,6 +206,18 @@ rules:
   no-array-constructor: off
   '@typescript-eslint/no-array-constructor': error
 
+  # Warn against using empty functions.
+  #
+  # Empty functions can be confusing and can be a mistake (e.g. () => {} returns
+  # undefined, not an empty object). In case when you do intentionally want to
+  # use an empty function, disable this rule with
+  #
+  #   /* eslint-disable-next-line @typescript-eslint/no-empty-function */
+  #
+  # and describe why are you using an empty function.
+  no-empty-function: off
+  '@typescript-eslint/no-empty-function': warn
+
   # Forbid extra parenthesis, except when used to make things clearer.
   no-extra-parens: off
   '@typescript-eslint/no-extra-parens':
@@ -146,9 +225,41 @@ rules:
     - all
     - nestedBinaryExpressions: false
 
+  # Warn against constructing functions in loops.
+  no-loop-func: off
+  '@typescript-eslint/no-loop-func': warn
+
+  # Unused expressions often indicate a logic error.
+  no-unused-expressions: off
+  '@typescript-eslint/no-unused-expressions': error
+
+  # Forbid unused variables, except when used in a
+  # `const { var, ...rest } = expr` to exclude some names from an object
+  no-unused-vars: off
+  '@typescript-eslint/no-unused-vars':
+    - error
+    - ignoreRestSiblings: true
+
+  # Forbid use of names before they are defined, except at the top level.
+  no-use-before-define: off
+  '@typescript-eslint/no-use-before-define':
+    - error
+    - functions: false
+      classes: false
+      variables: false
+      typedefs: false
+
+  # Forbid empty constructors.
+  no-useless-constructor: off
+  '@typescript-eslint/no-useless-constructor': error
+
   # Require consistent use of line breaks in object expressions.
   object-curly-spacing: off
   '@typescript-eslint/object-curly-spacing': [error, always]
+
+  # Require that each async function have an await expression.
+  require-await: off
+  '@typescript-eslint/require-await': error
 
   # Only use semicolons where they would not be inserted by ASI. In those places
   # semicolon goes at the start of a line.
@@ -165,16 +276,3 @@ rules:
     - error
     - anonymous: never
       named: never
-
-  # Disable until we can use PEP8-style spacing for default arguments.
-  # space-infix-ops: off
-  # '@typescript-eslint/space-infix-ops': error
-
-  # ----------------------------------------------------------------------------
-  # Following are modifications of ../style.yml.
-
-  # This rule is mainly used to ensure that there can't accidentally be two
-  # paths in the same function one returning undefined and one a value.
-  # In TypeScript this is guaranteed by the type system, so a style lint
-  # is unnecessary.
-  consistent-return: off
