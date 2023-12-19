@@ -1,4 +1,4 @@
-# Copyright 2019 OpenStax Poland
+# Copyright 2023 OpenStax Poland
 # Licensed under the MIT license. See LICENSE file in the project root for
 # full license text.
 
@@ -8,7 +8,6 @@
 # from eslint-plugin-react.
 
 extends:
-  - ../base.yml
   - plugin:react/recommended
 
 settings:
@@ -16,12 +15,52 @@ settings:
     version: 16.14.0
 
 rules:
+  # Require closing backed to be aligned with properties, and closing tag with
+  # opening tag.
+  react/jsx-closing-bracket-location: [error, props-aligned]
+
+  # Disable until
+  # return <tag>
+  #   content
+  # </tag>
+  # is legal
+  # react/jsx-closing-tag-location: error
+
+  # Disallow unnecessary curly braces in JSX.
+  react/jsx-curly-brace-presence: error
+
+  # Enforce consistent newlines inside braces.
+  react/jsx-curly-newline: error
+
+  # Disallow spaces inside of curly braces in JSX fragments.
+  react/jsx-curly-spacing: error
+
+  # Disallow spaces around equals signs.
+  react/jsx-equals-spacing: error
+
+  # In tags with multiple properties, when written over multiple lines,
+  # the first tag must be on its own line.
+  react/jsx-first-prop-new-line: error
+
+  # Prefer shorthand syntax for fragments (<>...</> rather than
+  # <React.Fragment>...</React.Fragment>).
+  react/jsx-fragments: error
+
+  # Disallow multiple props on one line, except when props and tag are all on
+  # the same line.
+  react/jsx-max-props-per-line:
+    - error
+    - when: multiline
+
   # Forbid use of .bind() and arrow functions as JSX callbacks, as they are not
   # comparable and can cause unnecessary re-renders.
   react/jsx-no-bind: error
 
   # Forbid uses of fragments with a single child element.
   react/jsx-no-useless-fragment: error
+
+  # Disallow multiple spaces between JSX props.
+  react/jsx-props-no-multi-spaces: error
 
   # Warn against dangerous usage of this.state in calls to this.setState.
   react/no-access-state-in-setstate: warn
@@ -63,3 +102,12 @@ rules:
   # Starting with React 17 (and 16.14) a new JSX transform was introduced, which
   # doesn't require React to be in scope.
   react/react-in-jsx-scope: off
+
+  # Enforce use of self-closing tags whenever possible.
+  react/self-closing-comp:
+    - error
+    - component: true
+      html: true
+
+  # Require propTypes to be sorted.
+  react/sort-prop-types: error
