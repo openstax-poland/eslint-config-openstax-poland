@@ -57,6 +57,9 @@ rules:
   # `lhs! == rhs` vs `lhs !== rhs`
   '@typescript-eslint/no-confusing-non-null-assertion': error
 
+  # Forbid empty interfaces
+  '@typescript-eslint/no-empty-interface': error
+
   # Forbid use of the any type.
   '@typescript-eslint/no-explicit-any': warn
 
@@ -72,11 +75,17 @@ rules:
   # Forbid potential security vulnerabilities.
   '@typescript-eslint/no-implied-eval': error
 
+  # Forbid non-null assertions on the left side of a ??
+  '@typescript-eslint/no-non-null-asserted-nullish-coalescing': error
+
   # Prefer `expr!` over `expr as type` when `expr` is nullable
   '@typescript-eslint/non-nullable-type-assertion-style': error
 
   # Forbid comparing against a boolean literal.
   '@typescript-eslint/no-unnecessary-boolean-literal-compare': error
+
+  # Forbid unnecessary boolean conditions
+  '@typescript-eslint/no-unnecessary-condition': error
 
   # Forbid unnecessary type assertions.
   '@typescript-eslint/no-unnecessary-type-assertion': error
@@ -88,8 +97,14 @@ rules:
   '@typescript-eslint/no-unsafe-assignment': warn
   '@typescript-eslint/no-unsafe-argument': warn
 
+  # Forbid -x where x is not a number
+  '@typescript-eslint/no-unsafe-unary-minus': error
+
   # Forbid `export {}` when it is not needed to turn a file into a module
   '@typescript-eslint/no-useless-empty-export': error
+
+  # Forbid uses of require()
+  '@typescript-eslint/no-require-imports': error
 
   # Only allow instances of Error to be thrown.
   '@typescript-eslint/no-throw-literal': error
@@ -122,6 +137,9 @@ rules:
   # readonly (for consistency with prefer-const).
   '@typescript-eslint/prefer-readonly': error
 
+  # Prefer f(): this over f(): Type when function contains return this
+  '@typescript-eslint/prefer-return-this-type': warn
+
   # Prefer String#startsWith and String#endsWith over equivalent methods.
   '@typescript-eslint/prefer-string-starts-ends-with': error
 
@@ -146,6 +164,7 @@ rules:
   # Following are ESlint rules which are handled by TypeScript itself, and as
   # such unnecessary.
   consistent-return: off
+  no-new-native-nonconstructor: off
 
   # ----------------------------------------------------------------------------
   # Following are typescript-eslint's “extension” rules, which modify default
