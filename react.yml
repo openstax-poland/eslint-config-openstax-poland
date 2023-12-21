@@ -22,34 +22,34 @@ rules:
   react/iframe-missing-sandbox: error
 
   # Ensure consistent indentation in JSX props
-  react/jsx-indent-props: error
+  '@stylistic/jsx-indent-props': error
 
-  # Require closing backed to be aligned with properties, and closing tag with
+  # Require closing bracket to be aligned with properties, and closing tag with
   # opening tag.
-  react/jsx-closing-bracket-location: [error, props-aligned]
+  '@stylistic/jsx-closing-bracket-location': [error, props-aligned]
 
   # Disable until
   # return <tag>
   #   content
   # </tag>
   # is legal
-  # react/jsx-closing-tag-location: error
+  # '@stylistic/jsx-closing-tag-location': error
 
   # Disallow unnecessary curly braces in JSX.
-  react/jsx-curly-brace-presence: error
+  '@stylistic/jsx-curly-brace-presence': error
 
   # Enforce consistent newlines inside braces.
-  react/jsx-curly-newline: error
+  '@stylistic/jsx-curly-newline': error
 
   # Disallow spaces inside of curly braces in JSX fragments.
-  react/jsx-curly-spacing: error
+  '@stylistic/jsx-curly-spacing': error
 
   # Disallow spaces around equals signs.
-  react/jsx-equals-spacing: error
+  '@stylistic/jsx-equals-spacing': error
 
   # In tags with multiple properties, when written over multiple lines,
   # the first tag must be on its own line.
-  react/jsx-first-prop-new-line: error
+  '@stylistic/jsx-first-prop-new-line': error
 
   # Prefer shorthand syntax for fragments (<>...</> rather than
   # <React.Fragment>...</React.Fragment>).
@@ -57,7 +57,7 @@ rules:
 
   # Disallow multiple props on one line, except when props and tag are all on
   # the same line.
-  react/jsx-max-props-per-line:
+  '@stylistic/jsx-max-props-per-line':
     - error
     - when: multiline
 
@@ -77,10 +77,10 @@ rules:
   react/jsx-no-useless-fragment: error
 
   # Require consistent spacing within JSX tags
-  react/jsx-tag-spacing: error
+  '@stylistic/jsx-tag-spacing': error
 
   # Disallow multiple spaces between JSX props.
-  react/jsx-props-no-multi-spaces: error
+  '@stylistic/jsx-props-no-multi-spaces': error
 
   # Warn against dangerous usage of this.state in calls to this.setState.
   react/no-access-state-in-setstate: warn
