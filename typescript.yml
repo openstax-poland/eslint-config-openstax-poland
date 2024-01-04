@@ -84,8 +84,14 @@ rules:
   # Forbid comparing against a boolean literal.
   '@typescript-eslint/no-unnecessary-boolean-literal-compare': error
 
-  # Forbid unnecessary boolean conditions
-  '@typescript-eslint/no-unnecessary-condition': error
+  # Forbid unnecessary boolean conditions. Disabled since it seems to have false
+  # positives. For example:
+  #
+  # const [variable] = function() ?? []
+  # if (variable == null) { ... }
+  #
+  # triggers this lint.
+  # '@typescript-eslint/no-unnecessary-condition': error
 
   # Forbid unnecessary type assertions.
   '@typescript-eslint/no-unnecessary-type-assertion': error
