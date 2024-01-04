@@ -77,7 +77,9 @@ rules:
   react/jsx-no-useless-fragment: error
 
   # Require consistent spacing within JSX tags
-  '@stylistic/jsx-tag-spacing': error
+  '@stylistic/jsx-tag-spacing':
+    - error
+    - beforeSelfClosing: allow
 
   # Disallow multiple spaces between JSX props.
   '@stylistic/jsx-props-no-multi-spaces': error
