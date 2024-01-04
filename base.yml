@@ -403,9 +403,6 @@ rules:
   # Forbid assignment in return statements.
   no-return-assign: error
 
-  # Forbid await expressions in return statements.
-  no-return-await: error
-
   # Forbid comparing a value against itself.
   no-self-compare: error
 
