@@ -304,6 +304,9 @@ rules:
     - all
     - nestedBinaryExpressions: false
 
+  # Warn on unnecessary semicolons
+  '@stylistic/no-extra-semi': warn
+
   # Forbid implicit type coercion
   no-implicit-coercion: error
 
@@ -522,6 +525,9 @@ rules:
 
   # Require space after case colon, and no spaces before it.
   '@stylistic/switch-colon-spacing': error
+
+  # Forbid spaces between ${} and its contents (except for multiline)
+  '@stylistic/template-curly-spacing': error
 
   # Forbid spaces between template literal and its tag.
   '@stylistic/template-tag-spacing': error

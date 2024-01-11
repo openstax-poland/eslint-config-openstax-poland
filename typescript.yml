@@ -162,6 +162,12 @@ rules:
   # colon.
   '@stylistic/type-annotation-spacing': error
 
+  # Consistent spacing style in generic parameters
+  '@stylistic/type-generic-spacing': error
+
+  # Required a space after and no spaces before the colon in a named tuple entry
+  '@stylistic/type-named-tuple-spacing': error
+
   # Warn when two or more overloads could be unified into a single function
   # using a union, an optional, or a rest parameter.
   '@typescript-eslint/unified-signatures': warn
