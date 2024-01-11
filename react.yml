@@ -21,6 +21,9 @@ rules:
   # Force specifying iframe sandbox, a good security practice
   react/iframe-missing-sandbox: error
 
+  # Use four spaces indentation.
+  '@stylistic/jsx-indent': error
+
   # Ensure consistent indentation in JSX props
   '@stylistic/jsx-indent-props': error
 
