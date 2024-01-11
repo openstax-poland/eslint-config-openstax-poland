@@ -1,0 +1,246 @@
+# Copyright 2023 OpenStax Poland
+# Licensed under the MIT license. See LICENSE file in the project root for
+# full license text.
+
+parser: '@typescript-eslint/parser'
+
+extends:
+  - plugin:import/typescript
+  - plugin:@typescript-eslint/recommended-type-checked
+
+rules:
+  # Require all overload signatures to be next to each other
+  '@typescript-eslint/adjacent-overload-signatures': error
+
+  # Prefer type[] over Array<type>.
+  '@typescript-eslint/array-type': error
+
+  # Prefer `expr as type` over `<type> expr`
+  '@typescript-eslint/consistent-type-assertions':
+    - error
+    - assertionStyle: as
+      objectLiteralTypeAssertions: allow-as-parameter
+
+  # Require all class members to be explicitly marked as either public,
+  # protected, or private.
+  '@typescript-eslint/explicit-member-accessibility': error
+
+  # Require non-inferred type annotations on all public APIs. For now warnings
+  # only, as this is a new lint and we aren't sure how well it works. In future
+  # we'd like to turn in into hard error.
+  '@typescript-eslint/explicit-module-boundary-types': warn
+
+  # Don't use member delimiters in interface declarations (for consistency with
+  # class declarations) and comma in type declarations (for consistency with
+  # object literals).
+  '@stylistic/member-delimiter-style':
+    - error
+    - multiline:
+        delimiter: none
+      singleline:
+        delimiter: comma
+      overrides:
+        typeLiteral:
+          multiline:
+            delimiter: comma
+            requireLast: true
+
+  # Enforce consistent naming convention. Since this is a new lint, and defining
+  # a style guide for TS/JS is non-trivial, this is currently only a warning.
+  '@typescript-eslint/naming-convention': warn
+
+  # Warn when calling toString (including implicitly) on a value which is known
+  # to produce useless output (eg. `"[object object]"`)
+  '@typescript-eslint/no-base-to-string': warn
+
+  # Forbid type assertions which may be mistaken for non-equality comparison:
+  # `lhs! == rhs` vs `lhs !== rhs`
+  '@typescript-eslint/no-confusing-non-null-assertion': error
+
+  # Forbid empty interfaces
+  '@typescript-eslint/no-empty-interface': error
+
+  # Forbid use of the any type.
+  '@typescript-eslint/no-explicit-any': warn
+
+  # Disallow unnecessary non-null assertions.
+  '@typescript-eslint/no-extra-non-null-assertion': error
+
+  # Disallow usage of classes as namespaces.
+  '@typescript-eslint/no-extraneous-class': error
+
+  # Require errors in promises to be handled.
+  '@typescript-eslint/no-floating-promises': error
+
+  # Forbid potential security vulnerabilities.
+  '@typescript-eslint/no-implied-eval': error
+
+  # Forbid non-null assertions on the left side of a ??
+  '@typescript-eslint/no-non-null-asserted-nullish-coalescing': error
+
+  # Prefer `expr!` over `expr as type` when `expr` is nullable
+  '@typescript-eslint/non-nullable-type-assertion-style': error
+
+  # Forbid comparing against a boolean literal.
+  '@typescript-eslint/no-unnecessary-boolean-literal-compare': error
+
+  # Forbid unnecessary boolean conditions. Disabled since it seems to have false
+  # positives. For example:
+  #
+  # const [variable] = function() ?? []
+  # if (variable == null) { ... }
+  #
+  # triggers this lint.
+  # '@typescript-eslint/no-unnecessary-condition': error
+
+  # Forbid unnecessary type assertions.
+  '@typescript-eslint/no-unnecessary-type-assertion': error
+
+  # Warn when using <T extends any> or <T extends unknown>.
+  '@typescript-eslint/no-unnecessary-type-constraint': warn
+
+  # Warn only because of false positives when using .bind
+  '@typescript-eslint/no-unsafe-assignment': warn
+  '@typescript-eslint/no-unsafe-argument': warn
+
+  # Forbid -x where x is not a number
+  '@typescript-eslint/no-unsafe-unary-minus': error
+
+  # Forbid `export {}` when it is not needed to turn a file into a module
+  '@typescript-eslint/no-useless-empty-export': error
+
+  # Forbid uses of require()
+  '@typescript-eslint/no-require-imports': error
+
+  # Only allow instances of Error to be thrown.
+  '@typescript-eslint/no-throw-literal': error
+
+  # Prefer `literal as const` over `literal as literal`.
+  '@typescript-eslint/prefer-as-const': error
+
+  # Prefer for-of loops over looping with an index.
+  '@typescript-eslint/prefer-for-of': error
+
+  # Prefer a function type over a callable interface if it has no additional
+  # properties.
+  '@typescript-eslint/prefer-function-type': error
+
+  # Prefer Array#includes over Array#indexOf and String#includes over
+  # String#indexOf when checking for presence of an item.
+  '@typescript-eslint/prefer-includes': error
+
+  # Prefer TS 3.7's nullish coalescing operator (`??`) over logical OR (`||`).
+  #
+  # Warn only because it has too many false-positives.
+  '@typescript-eslint/prefer-nullish-coalescing': warn
+
+  # Prefer the optional chain operator (?.) over manual check for null before
+  # property access. Currently reported as a warning only because this lint
+  # still occasionally reports false positives.
+  '@typescript-eslint/prefer-optional-chain': warn
+
+  # Private class properties which are never modified should be marked as
+  # readonly (for consistency with prefer-const).
+  '@typescript-eslint/prefer-readonly': error
+
+  # Prefer f(): this over f(): Type when function contains return this
+  '@typescript-eslint/prefer-return-this-type': warn
+
+  # Prefer String#startsWith and String#endsWith over equivalent methods.
+  '@typescript-eslint/prefer-string-starts-ends-with': error
+
+  # Require Promise-returning functions to be marked async.
+  '@typescript-eslint/promise-function-async': error
+
+  # Require calls to Array#sort to provide a comparator function.
+  '@typescript-eslint/require-array-sort-compare': error
+
+  # Require switch statements to cover all possible cases.
+  '@typescript-eslint/switch-exhaustiveness-check': error
+
+  # Forbid spaces before type annotations and require a single space after the
+  # colon.
+  '@stylistic/type-annotation-spacing': error
+
+  # Consistent spacing style in generic parameters
+  '@stylistic/type-generic-spacing': error
+
+  # Required a space after and no spaces before the colon in a named tuple entry
+  '@stylistic/type-named-tuple-spacing': error
+
+  # Warn when two or more overloads could be unified into a single function
+  # using a union, an optional, or a rest parameter.
+  '@typescript-eslint/unified-signatures': warn
+
+  # ----------------------------------------------------------------------------
+  # Following are ESlint rules which are handled by TypeScript itself, and as
+  # such unnecessary.
+  consistent-return: off
+  no-new-native-nonconstructor: off
+
+  # ----------------------------------------------------------------------------
+  # Following are typescript-eslint's “extension” rules, which modify default
+  # eslint rules. Remember to update these when changing ../base.yml.
+
+  # Enforces default case even when it's provable not necessary. Exhaustiveness
+  # of switch statements is also now enforced by
+  # @typescript-eslint/switch-exhaustiveness-check.
+  default-case: off
+
+  dot-notation: off
+  '@typescript-eslint/dot-notation': error
+
+  # Force all default parameters to come last.
+  default-param-last: off
+  '@typescript-eslint/default-param-last': error
+
+  # Handled by TS itself
+  import/named: off
+
+  # Prefer array literal over array constructor.
+  no-array-constructor: off
+  '@typescript-eslint/no-array-constructor': error
+
+  # Warn against using empty functions.
+  #
+  # Empty functions can be confusing and can be a mistake (e.g. () => {} returns
+  # undefined, not an empty object). In case when you do intentionally want to
+  # use an empty function, disable this rule with
+  #
+  #   /* eslint-disable-next-line @typescript-eslint/no-empty-function */
+  #
+  # and describe why are you using an empty function.
+  no-empty-function: off
+  '@typescript-eslint/no-empty-function': warn
+
+  # Warn against constructing functions in loops.
+  no-loop-func: off
+  '@typescript-eslint/no-loop-func': warn
+
+  # Unused expressions often indicate a logic error.
+  no-unused-expressions: off
+  '@typescript-eslint/no-unused-expressions': error
+
+  # Forbid unused variables, except when used in a
+  # `const { var, ...rest } = expr` to exclude some names from an object
+  no-unused-vars: off
+  '@typescript-eslint/no-unused-vars':
+    - error
+    - ignoreRestSiblings: true
+
+  # Forbid use of names before they are defined, except at the top level.
+  no-use-before-define: off
+  '@typescript-eslint/no-use-before-define':
+    - error
+    - functions: false
+      classes: false
+      variables: false
+      typedefs: false
+
+  # Forbid empty constructors.
+  no-useless-constructor: off
+  '@typescript-eslint/no-useless-constructor': error
+
+  # Require that each async function have an await expression.
+  require-await: off
+  '@typescript-eslint/require-await': error

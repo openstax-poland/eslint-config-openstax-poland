@@ -1,4 +1,4 @@
-# Copyright 2019 OpenStax Poland
+# Copyright 2023 OpenStax Poland
 # Licensed under the MIT license. See LICENSE file in the project root for
 # full license text.
 
@@ -12,17 +12,20 @@ env:
   es6: true
 parserOptions:
   sourceType: module
-  ecmaVersion: 2018
+  ecmaVersion: latest
 
 # Use ESLint's recommendations. Remember to review changes to them when
 # upgrading ESLint.
-extends: eslint:recommended
+extends:
+  - eslint:recommended
+  - plugin:@stylistic/disable-legacy
 
 # Report eslint-disable comments which don't do anything.
 reportUnusedDisableDirectives: true
 
 plugins:
   - import
+  - '@stylistic'
 
 settings:
   # Consider PnP-installed modules as external
@@ -32,14 +35,67 @@ rules:
   # Check that for each setter there is a corresponding getter.
   accessor-pairs: warn
 
+  # Require consistent use of line breaks in array expressions.
+  '@stylistic/array-bracket-newline': [error, consistent]
+  '@stylistic/array-element-newline': [error, consistent]
+
+  # There should be no spaces between array brackets and its content.
+  '@stylistic/array-bracket-spacing': error
+
+  # Forbid braces around an arrow function's body unless necessary.
+  arrow-body-style: error
+
+  # Forbid parentheses in arrow functions with a single argument.
+  '@stylistic/arrow-parens': [error, as-needed]
+
+  # Require a space before and after the arrow token.
+  '@stylistic/arrow-spacing': error
+
+  # Require consistent use of line breaks in object expressions.
+  '@stylistic/block-spacing': error
+
+  # Use the “One True Brace Style”
+  '@stylistic/brace-style': error
+
+  # Require dangling comma in multi-line expressions.
+  '@stylistic/comma-dangle': [error, always-multiline]
+
+  # Single space after a comma, no spaces before.
+  '@stylistic/comma-spacing': error
+
+  # No spaces inside computed property brackets.
+  '@stylistic/computed-property-spacing': error
+
+  # Ensure return statements are used consistently with or without a value.
+  consistent-return: error
+
+  # Require curly braces only around multiline bodies, and require that they
+  # be used consistently across branches.
+  curly: [error, multi-line, consistent]
+
   # Require default case to be present in each switch statement.
   default-case: error
+
+  # Require default case to be the last branch of a switch condition
+  default-case-last: error
 
   # Force all default parameters to come last.
   default-param-last: error
 
+  # In a multiline property access the dot operator attaches to property name.
+  '@stylistic/dot-location': [error, property]
+
+  # Require that properties be accessed via the dot operator when possible.
+  dot-notation: error
+
   # Only use type-safe equality operators.
   eqeqeq: [error, smart]
+
+  # Require empty line at end of file.
+  '@stylistic/eol-last': error
+
+  # There is no spacing between function name and opening parenthesis.
+  '@stylistic/function-call-spacing': error
 
   # Require all functions to have a name.
   #
@@ -48,9 +104,38 @@ rules:
   # difficult (especially when there are multiple such functions).
   func-names: error
 
+  # Require consistent use of newlines between function call arguments.
+  '@stylistic/function-call-argument-newline': [error, consistent]
+
+  # In generator functions star is placed next to the function token and there
+  # is a space between star and functions name. In generator methods star
+  # is placed next to the method name.
+  '@stylistic/generator-star-spacing':
+    - error
+    - anonymous: neither
+      method: before
+
+  # Require accessor pairs to be declared together, without other members in
+  # between
+  grouped-accessor-pairs: error
+
+  # When using arrow functions with implicit return (without braces) the value
+  # must be placed on the same line as arrow token.
+  '@stylistic/implicit-arrow-linebreak': error
+
   # Detect mistakes in exporting, such as repeated exports, duplicate names,
   # or multiple defaults.
   import/export: error
+
+  # Import paths shouldn't use extensions when importing JavaScript modules,
+  # and should use extensions in all other cases.
+  import/extensions:
+    - error
+    - always
+    - js: never
+      jsx: never
+      ts: never
+      tsx: never
 
   # Import statements must precede other statements.
   import/first: error
@@ -58,9 +143,19 @@ rules:
   # Forbid imports of names which don't exist in imported modules
   import/named: error
 
+  # Enforce an empty line after last import statement.
+  import/newline-after-import:
+    - error
+    - considerComments: true
+
   # Forbid imports from absolute paths (beginning with / on unix-compatible
   # systems or with a drive letter on windows).
   import/no-absolute-path: error
+
+  # Require all default exports to be named
+  import/no-anonymous-default-export:
+    - error
+    - allowCallExpression: false
 
   # Forbid use of the commonjs module system if it can be replaced with ES5
   # import/export statements
@@ -70,17 +165,84 @@ rules:
   no-duplicate-imports: off
   import/no-duplicates: error
 
+  # Forbid import {} from '..'
+  import/no-empty-named-blocks: error
+
   # Forbid imports of dependencies not declared in package.json.
   import/no-extraneous-dependencies: error
 
   # Forbid use of module.exports in ES5 modules
   import/no-import-module-exports: error
 
+  # Prefer import name over import { default as name }.
+  import/no-named-default: error
+
   # Forbid a module from importing itself.
   import/no-self-import: error
 
   # Use as simple import paths as possible.
   import/no-useless-path-segments: error
+
+  import/order:
+    - error
+    - newlines-between: always
+      groups:
+        - ["builtin", "external", "unknown"]
+        - ["internal", "parent", "sibling", "index"]
+
+  sort-imports:
+    - error
+    - ignoreCase: true
+      ignoreDeclarationSort: true
+
+  # Use four spaces indentation.
+  '@stylistic/indent':
+    - error
+    - 4
+      # Align subsequent variables in a declaration to the first
+    - VariableDeclarator: first
+      ignoredNodes:
+      # Conflicts with react/jsx-closing-bracket-location.
+      - JSXOpeningElement
+      # Due to complexities of TypeScript @typescript-eslint/indent doesn't yet
+      # handle all nodes properly. Following is list of nodes with which we had
+      # problems:
+      - TSUnionType
+
+  # No spaces before colon, one space after colon.
+  '@stylistic/key-spacing': error
+
+  # Single space at either end of a keyword.
+  '@stylistic/keyword-spacing': error
+
+  # Use Unix style line breaks.
+  '@stylistic/linebreak-style': error
+
+  # Require spacing between class members.
+  '@stylistic/lines-between-class-members': error
+
+  # Limit line width to 80 columns.
+  '@stylistic/max-len':
+    - error
+    - code: 100
+      comments: 80
+
+  # Allow at most one statement per line.
+  '@stylistic/max-statements-per-line': error
+
+  # Use sequences of line comments for multi-line comments
+  multiline-comment-style: [error, separate-lines]
+
+  # Require condition and each of the operands of a ternary expression to either
+  # be in a single line or each in a separate line.
+  '@stylistic/multiline-ternary': [error, always-multiline]
+
+  # Require parentheses in new expressions.
+  '@stylistic/new-parens': error
+
+  # Require each chained call (for chains longer than 3) to be on a separate
+  # line.
+  '@stylistic/newline-per-chained-call': error
 
   # Forbid use of alert().
   no-alert: error
@@ -96,6 +258,23 @@ rules:
   no-implied-eval: error
   no-script-url: error
 
+  # Prefer array literal over array constructor.
+  no-array-constructor: error
+
+  # Forbid use of console, except for logging problems.
+  no-console:
+    - error
+    - allow: [warn, error]
+
+  # Useless binary expressions are likely indication of a programming mistake
+  no-constant-binary-expression: error
+
+  # Forbid returning values from constructors
+  no-constructor-return: error
+
+  # Forbid else { return }
+  no-else-return: error
+
   # Warn against using empty functions.
   #
   # Empty functions can be confusing and can be a mistake (e.g. () => {} returns
@@ -107,6 +286,9 @@ rules:
   # and describe why are you using an empty function.
   no-empty-function: warn
 
+  # Forbid empty static {} blocks
+  no-empty-static-block: error
+
   # Forbid extending prototypes of build-in objects.
   no-extend-native: error
 
@@ -116,6 +298,15 @@ rules:
   # Forbid unnecessary labels.
   no-extra-label: error
 
+  # Forbid extra parenthesis, except when used to make things clearer.
+  '@stylistic/no-extra-parens':
+    - error
+    - all
+    - nestedBinaryExpressions: false
+
+  # Warn on unnecessary semicolons
+  '@stylistic/no-extra-semi': warn
+
   # Forbid implicit type coercion
   no-implicit-coercion: error
 
@@ -123,17 +314,26 @@ rules:
   # a runtime error.
   no-import-assign: error
 
+  # Forbid unnecessary use of blocks.
+  no-lone-blocks: error
+
+  # Forbid else blocks with a single if clause. Use else if instead.
+  no-lonely-if: error
+
   # Warn against constructing functions in loops.
   no-loop-func: warn
 
   # Forbid mixing of operators with the same precedence.
-  no-mixed-operators: error
+  '@stylistic/no-mixed-operators': error
 
   # Forbid sequences of multiple spaces.
   #
   # Multiple spaces are usually inserted by mistake, and are a common source of
   # diff noise.
-  no-multi-spaces: warn
+  '@stylistic/no-multi-spaces': warn
+
+  # Forbid consecutive empty lines.
+  '@stylistic/no-multiple-empty-lines': error
 
   # Forbid use of new for side effects.
   no-new: error
@@ -141,17 +341,33 @@ rules:
   # Forbid use of the Function constructor.
   no-new-func: error
 
+  # Prevent accidental attempts to invoke new on non-constructive singletons
+  no-new-native-nonconstructor: error
+
   # Prefer object literal over object constructor.
   no-new-object: error
 
   # Forbid use of new Wrapper for primitive type wrappers.
   no-new-wrappers: error
 
+  # Forbid most usages of the Object() constructor
+  no-object-constructor: error
+
+  # Forbid returning values from promise executors, as it's likely a mistake (
+  # their return value is never used)
+  no-promise-executor-return: error
+
+  # Forbid initializing variables to undefined.
+  no-undef-init: error
+
   # Forbid loops in which loop condition never changes.
   no-unmodified-loop-condition: error
 
   # Forbid ternary operator when simpler alternatives exist.
   no-unneeded-ternary: error
+
+  # Forbid loops which are not actually loops
+  no-unreachable-loop: error
 
   # Unused expressions often indicate a logic error.
   no-unused-expressions: error
@@ -161,6 +377,9 @@ rules:
   no-unused-vars:
     - error
     - ignoreRestSiblings: true
+
+  # Forbid private class members which are never used
+  no-unused-private-class-members: error
 
   # Forbid use of names before they are defined, except at the top level.
   no-use-before-define:
@@ -187,14 +406,14 @@ rules:
   # Forbid assignment in return statements.
   no-return-assign: error
 
-  # Forbid await expressions in return statements.
-  no-return-await: error
-
   # Forbid comparing a value against itself.
   no-self-compare: error
 
   # Forbid use of the comma operator.
   no-sequences: error
+
+  # Forbid use of the tab character.
+  '@stylistic/no-tabs': error
 
   # Only allow instances of Error to be thrown.
   no-throw-literal: error
@@ -204,13 +423,53 @@ rules:
   # Tailing whitespace often gets introduced by accident when editing (since it
   # usually not displayed or marked in any way), and is a common source of diff
   # noise.
-  no-trailing-spaces: error
+  '@stylistic/no-trailing-spaces': error
 
   # Forbid use of the var keyword.
   no-var: error
 
+  # There should be no spaces around the dot operator, except indentation.
+  '@stylistic/no-whitespace-before-property': error
+
+  # Require consistent use of line breaks in object expressions.
+  '@stylistic/object-curly-newline':
+    - error
+    - multiline: true
+      consistent: true
+  '@stylistic/object-curly-spacing': [error, always]
+
+  # Require use of object shorthand syntax.
+  object-shorthand: error
+
+  # Only allow one variable declaration per line when they are initialized.
+  '@stylistic/one-var-declaration-per-line': error
+
+  # In multiline binary expressions operator is always at the beginning of
+  # a line.
+  '@stylistic/operator-linebreak': [error, before]
+
+  # Disallow “block padding”
+  '@stylistic/padded-blocks': [error, never]
+
+  # Prefer arrow functions over function expressions as callbacks.
+  prefer-arrow-callback: error
+
+  # Variables which are never assigned should be declared const.
+  prefer-const:
+    - error
+    - destructuring: all
+
+  # Prefer x ** y over Math.pow(x, y)
+  prefer-exponentiation-operator: error
+
   # Prefer numeric literals over Number.parseInt.
   prefer-numeric-literals: error
+
+  # Prefer Object.hasOwn over Object.prototype.hasOwnProperty
+  prefer-object-has-own: warn
+
+  # Prefer object spread syntax over Object.assign
+  prefer-object-spread: error
 
   # Forbid non-Error values as arguments to Promise.reject().
   prefer-promise-reject-errors: error
@@ -221,6 +480,58 @@ rules:
   # Prefer arguments spread over the arguments variable.
   prefer-rest-params: error
 
+  # Prefer argument spread over calling .apply()
+  prefer-spread: error
+
+  # Forbid spaces between the rest operator and its argument.
+  '@stylistic/rest-spread-spacing': error
+
+  # Only quote properties when needed.
+  '@stylistic/quote-props': [error, as-needed]
+
+  # Only use semicolons where they would not be inserted by ASI. In those places
+  # semicolon goes at the start of a line.
+  '@stylistic/semi':
+    - error
+    - never
+    - beforeStatementContinuationChars: always
+  '@stylistic/semi-style': [error, first]
+
+  # There should always be a space before a block's opening brace.
+  '@stylistic/space-before-blocks': error
+
+  # Forbid spaces before the left parenthesis opening a function's parameter
+  # list, except for async arrow functions, where it's required.
+  '@stylistic/space-before-function-paren':
+    - error
+    - anonymous: never
+      named: never
+
+  # Forbid spaces within parentheses.
+  '@stylistic/space-in-parens': error
+
+  # Disable until we can use PEP8-style spacing for default arguments.
+  # '@stylistic/space-infix-ops': error
+
+  # Require spaces around word prefix operators (new, void, etc.), and a space
+  # before and no spaces after non-word prefix operators.
+  '@stylistic/space-unary-ops': error
+
+  # Require a space after the initial //, /*, /**, or /// of a comment.
+  '@stylistic/spaced-comment':
+    - error
+    - always
+    - markers: [/]
+
+  # Require space after case colon, and no spaces before it.
+  '@stylistic/switch-colon-spacing': error
+
+  # Forbid spaces between ${} and its contents (except for multiline)
+  '@stylistic/template-curly-spacing': error
+
+  # Forbid spaces between template literal and its tag.
+  '@stylistic/template-tag-spacing': error
+
   # Forbid Unicode BOM.
   unicode-bom: error
 
@@ -229,3 +540,7 @@ rules:
 
   # Require that each generator function have an await expression.
   require-yield: error
+
+  # There are no spaces between yield and star, and there is space between star
+  # and argument.
+  '@stylistic/yield-star-spacing': error

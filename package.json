@@ -3,21 +3,20 @@
   "version": "0.4.0",
   "license": "MIT",
   "files": [
-    "base.js",
-    "base.yml",
-    "react",
-    "style.js",
-    "style.yml",
-    "typescript"
+    "*.js",
+    "*.yml"
   ],
   "dependencies": {
-    "eslint-plugin-import": "2.28.1"
+    "@stylistic/eslint-plugin": "^1.5.1",
+    "eslint-plugin-import": "^2.29.1"
   },
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.7.2",
-    "@typescript-eslint/parser": "^6.7.2",
-    "eslint": "^8.49.0",
+    "@stylistic/eslint-plugin": "^1.5.1",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.50.0",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-react": "^7.33.2"
   },
-  "packageManager": "yarn@3.6.3"
+  "packageManager": "yarn@4.0.2"
 }

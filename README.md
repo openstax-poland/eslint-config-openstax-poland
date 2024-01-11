@@ -35,21 +35,17 @@ ESlint configurations used by OpenStax Poland.
 - `openstax-poland/base`: Extends `eslint:recommended` with additional best
   practices. Designed to contain as few stylistic rules as possible.
 
-- `openstax-poland/react/base`: Extends `openstax-poland/base` with additional
+- `openstax-poland/react`: Extends `openstax-poland/base` with additional
   rules from `eslint-plugin-react`. To use this config you must also add
   `eslint-plugin-react` to your `devDependencies`.
 
-- `openstax-poland/typescript/base`: Extends `openstax-poland/base` with
+- `openstax-poland/typescript`: Extends `openstax-poland/base` with
   additional rules for TypeScript. See [TypeScript](#typescript) for
   instructions on using this config.
 
-- `openstax-poland/style`: Opinionated style, based on `openstax-poland/base`.
-
-- `openstax-poland/react/style`: Opinionated style, based on
-  `openstax-poland/react/base` and `openstax-poland/style`.
-
-- `openstax-poland/typescript/style`: Opinionated style, based on
-  `openstax-poland/typescript/base` and `openstax-poland/style`.
+Note that while different configs can be used together, they don't extend
+one another. It's recommended that in your config you extend
+`openstax-poland/base` first, and then add other configs of your choice.
 
 ## Adding a new config
 
@@ -57,14 +53,7 @@ ESlint configurations used by OpenStax Poland.
 
 2.  Create a file named `my-config.yml`. This is your primary config file.
 
-3.  If you want to extend an existing config, use relative paths to YAML files.
-    For example if you want to extend the base config do
-
-    ```yaml
-    extends: relative/path/to/base.yml
-    ```
-
-4.  Create a file named `my-config.js` with following content:
+3.  Create a file named `my-config.js` with following content:
 
     ```js
     module.exports = {
