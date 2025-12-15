@@ -63,6 +63,9 @@ rules:
   # Single space after a comma, no spaces before.
   '@stylistic/comma-spacing': error
 
+  # Require comma to be located at the end of line
+  '@stylistic/comma-style': [error, last]
+
   # No spaces inside computed property brackets.
   '@stylistic/computed-property-spacing': error
 
@@ -72,6 +75,10 @@ rules:
   # Require curly braces only around multiline bodies, and require that they
   # be used consistently across branches.
   curly: [error, multi-line, consistent]
+  '@stylistic/curly-newline':
+    - error
+    - multiline: true
+      consistent: true
 
   # Require default case to be present in each switch statement.
   default-case: error
@@ -231,7 +238,7 @@ rules:
   '@stylistic/max-statements-per-line': error
 
   # Use sequences of line comments for multi-line comments
-  multiline-comment-style: [error, separate-lines]
+  '@stylistic/multiline-comment-style': [error, separate-lines]
 
   # Require condition and each of the operands of a ternary expression to either
   # be in a single line or each in a separate line.
@@ -521,7 +528,11 @@ rules:
   '@stylistic/spaced-comment':
     - error
     - always
-    - markers: [/]
+    - line:
+        markers: ['/']
+      block:
+        balanced: true
+        markers: ['!']
 
   # Require space after case colon, and no spaces before it.
   '@stylistic/switch-colon-spacing': error

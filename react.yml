@@ -18,6 +18,9 @@ rules:
   # Default value of type is "submit", which may cause unexpected page reloads
   react/button-has-type: error
 
+  # Forbid uses of forwardRef with no/unused ref parameter
+  react/forward-ref-uses-ref: error
+
   # Force specifying iframe sandbox, a good security practice
   react/iframe-missing-sandbox: error
 
@@ -31,12 +34,7 @@ rules:
   # opening tag.
   '@stylistic/jsx-closing-bracket-location': [error, props-aligned]
 
-  # Disable until
-  # return <tag>
-  #   content
-  # </tag>
-  # is legal
-  # '@stylistic/jsx-closing-tag-location': error
+  '@stylistic/jsx-closing-tag-location': [error, line-aligned]
 
   # Disallow unnecessary curly braces in JSX.
   '@stylistic/jsx-curly-brace-presence': error
@@ -87,6 +85,9 @@ rules:
   # Disallow multiple spaces between JSX props.
   '@stylistic/jsx-props-no-multi-spaces': error
 
+  # Forbid using {...props} two times for the same component
+  react/jsx-props-no-spread-multi: error
+
   # Warn against dangerous usage of this.state in calls to this.setState.
   react/no-access-state-in-setstate: warn
 
@@ -107,6 +108,10 @@ rules:
 
   # Forbid usage of unsafe lifecycle methods.
   react/no-unsafe: error
+
+  # Forbid components in components (as their state will never be preserved
+  # across renders)
+  react/no-unstable-nested-components: error
 
   # Don't use shouldComponentUpdate within a React.PureComponent, as then
   # extending PureComponent is meaningless.
