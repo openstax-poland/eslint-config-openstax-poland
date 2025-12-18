@@ -1,5 +1,8 @@
 node_modules/
 
+# build files
+*.js
+
 # https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
 .yarn/*
 !.yarn/patches
