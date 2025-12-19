@@ -7,6 +7,8 @@
     Non-TypeScript projects are no longer supported. You no longer need to
     provide peer dependencies `@typescript-eslint/eslint-plugin` and
     `@typescript-eslint/parser`
+4.  `@openstax-poland/esling-config/react` has additional peer dependency
+    `eslint-plugin-react-hooks`
 
 ## Migrating from 0.4 to 0.5
 

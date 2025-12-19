@@ -23,16 +23,21 @@
     "typescript-eslint": "^8.50.0"
   },
   "peerDependencies": {
-    "eslint-plugin-react": "^7.37.0"
+    "eslint-plugin-react": "^7.37.0",
+    "eslint-plugin-react-hooks": "*"
   },
   "peerDependenciesMeta": {
     "eslint-plugin-react": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
       "optional": true
     }
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
     "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "typescript": "^5.9.3"
   },
   "packageManager": "yarn@4.12.0"

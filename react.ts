@@ -9,6 +9,7 @@
 
 import { defineConfig } from 'eslint/config'
 import react from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
 
 export default defineConfig({
     plugins: {
@@ -18,6 +19,7 @@ export default defineConfig({
     extends: [
         react.configs.flat['recommended']!,
         react.configs.flat['jsx-runtime']!,
+        reactHooks.configs.flat.recommended,
     ],
 
     languageOptions: {
