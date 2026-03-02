@@ -12,6 +12,8 @@ import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 
 export default defineConfig({
+    name: '@openstax-poland/esling-config/react',
+
     plugins: {
         react,
     },
@@ -62,6 +64,20 @@ export default defineConfig({
 
         // Forbid using {...props} two times for the same component
         'react/jsx-props-no-spread-multi': 'error',
+
+        // Enforce consistent naming convention. Since this is a new lint, and
+        // defining a style guide for TS/JS is non-trivial, this is currently
+        // only a warning.
+        //
+        // Modified from base.ts to allow component functions to be in CamelCase
+        // NOTE: keep in sync with base configuration in base.ts
+        '@typescript-eslint/naming-convention': [
+            'warn',
+            {
+                selector: 'function',
+                format: ['camelCase', 'PascalCase'],
+            },
+        ],
 
         // Warn against dangerous usage of this.state in calls to this.setState
         'react/no-access-state-in-setstate': 'warn',

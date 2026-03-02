@@ -13,6 +13,8 @@ import js from '@eslint/js'
 import tseslint from 'typescript-eslint'
 
 export const base = defineConfig({
+    name: '@openstax-poland/esling-config',
+
     plugins: {
         js,
         '@stylistic': stylistic,
@@ -102,6 +104,11 @@ export const base = defineConfig({
         // Forbid imports from absolute paths (beginning with / on
         // unix-compatible systems or with a drive letter on windows).
         'import-x/no-absolute-path': 'error',
+
+        '@stylistic/max-statements-per-line': ['error', {
+            max: 1,
+            ignoredNodes: ['BreakStatement'],
+        }],
 
         // Forbid use of alert().
         'no-alert': 'error',
@@ -442,6 +449,7 @@ export const base = defineConfig({
 
         // Use four spaces indentation.
         '@stylistic/indent': ['error', 4, {
+            SwitchCase: 0,
             // Align subsequent variables in a declaration to the first
             VariableDeclarator: 'first',
         }],
@@ -485,6 +493,7 @@ export const base = defineConfig({
         // Enforce consistent naming convention. Since this is a new lint, and
         // defining a style guide for TS/JS is non-trivial, this is currently
         // only a warning.
+        // NOTE: keep in sync with modified configuration in react.ts
         '@typescript-eslint/naming-convention': 'warn',
 
         // Enforce an empty line after last import statement.
@@ -568,6 +577,8 @@ export const base = defineConfig({
                 ['builtin', 'external', 'unknown'],
                 ['internal', 'parent', 'sibling', 'index'],
             ],
+            alphabetize: { order: 'asc' },
+            named: true,
         }],
 
         // Prefer arrow functions over function expressions as callbacks.
