@@ -1,0 +1,41 @@
+{
+  "name": "@openstax-poland/eslint-config",
+  "version": "0.7.0",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "*.js",
+    "*.d.ts"
+  ],
+  "exports": {
+    ".": {
+      "import": "./base.js",
+      "types": "./base.d.ts"
+    },
+    "./react": {
+      "import": "./react.js",
+      "types": "./react.d.ts"
+    }
+  },
+  "dependencies": {
+    "@eslint/js": "^9.39.3",
+    "@stylistic/eslint-plugin": "^5.9.0",
+    "eslint": "^9.39.3",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import-x": "^4.16.1",
+    "typescript-eslint": "^8.56.1"
+  },
+  "peerDependencies": {
+    "eslint-plugin-react": "^7.37.0",
+    "eslint-plugin-react-hooks": "^7.0.1"
+  },
+  "peerDependenciesMeta": {
+    "eslint-plugin-react": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    }
+  },
+  "packageManager": "yarn@4.12.0"
+}
