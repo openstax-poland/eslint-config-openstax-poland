@@ -22,16 +22,16 @@
     "prepare": "tsc -b"
   },
   "dependencies": {
-    "@eslint/js": "^9.39.2",
-    "@stylistic/eslint-plugin": "^5.6.1",
-    "eslint": "^9.39.2",
+    "@eslint/js": "^9.39.3",
+    "@stylistic/eslint-plugin": "^5.9.0",
+    "eslint": "^9.39.3",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-x": "^4.16.1",
-    "typescript-eslint": "^8.50.0"
+    "typescript-eslint": "^8.56.1"
   },
   "peerDependencies": {
     "eslint-plugin-react": "^7.37.0",
-    "eslint-plugin-react-hooks": "*"
+    "eslint-plugin-react-hooks": "^7.0.1"
   },
   "peerDependenciesMeta": {
     "eslint-plugin-react": {
@@ -42,7 +42,7 @@
     }
   },
   "devDependencies": {
-    "@types/node": "^25.0.3",
+    "@types/node": "^25.3.3",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "typescript": "^5.9.3"
