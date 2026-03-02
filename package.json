@@ -7,7 +7,7 @@
     "*.js"
   ],
   "exports": {
-    "./base": "./base.js",
+    ".": "./base.js",
     "./react": "./react.js"
   },
   "scripts": {
