@@ -1,3 +1,8 @@
+## Migration from 0.6 to 0.7
+
+1.  Replace imports of `@openstax-poland/esling-config/base` with
+    ``@openstax-poland/esling-config`
+
 ## Migrating from 0.5 to 0.6
 
 1.  Package was renamed to `@openstax-poland/esling-config`
