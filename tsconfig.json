@@ -27,5 +27,8 @@
         "noUncheckedSideEffectImports": true,
         "moduleDetection": "force",
         "skipLibCheck": true,
+
+        // Emit
+        "declaration": true,
     },
 }
